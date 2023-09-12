@@ -1,16 +1,14 @@
 var buttons=document.querySelectorAll(".drum");
 for (let i = 0; i < buttons.length; i++) {
     buttons[i].addEventListener("click", function () {
-        var buttonText=this.innerHTML;
-        console.log(buttonText);
-        player(buttonText);
+        player(this.innerText);
+        buttonAnimation(this.innerText);
     });
 }
     window.addEventListener("keydown", function () {
-        var keyDown=event.key;
-        console.log(keyDown);
-        player(keyDown);
-        
+        console.log(event.key);
+        player(event.key);
+        buttonAnimation(event.key);
     });
     function player(target){
         switch (target) {
@@ -43,4 +41,10 @@ for (let i = 0; i < buttons.length; i++) {
                 audio.play();
                 break;
         }
+    }
+    function buttonAnimation(currentKey){
+        document.querySelector("."+currentKey).classList.add("pressed");
+        setTimeout(function(){
+        document.querySelector("."+currentKey).classList.remove("pressed");
+    },100);
     }
